@@ -32,4 +32,3 @@ public class FilmhubApplication {
 //            rated_movies:
 //            want_to_see:
 //            favorites:
-//        }
