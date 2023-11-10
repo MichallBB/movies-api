@@ -33,7 +33,7 @@ public class FilmhubApplication {
 //            want_to_see: List<movie_id>
 //            favorites: List<movie_id>
 //        }
-//Table movie {
+// 		Table movie {
 //		id integer [primary key]
 //		name varchar
 //		production_date timestamp
