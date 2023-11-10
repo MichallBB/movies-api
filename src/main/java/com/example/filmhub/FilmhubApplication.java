@@ -48,7 +48,7 @@ public class FilmhubApplication {
 //		id integer [primary key]
 //		real_name varchar
 //		name_in_movie varchar
-//		}
+//		}2
 //
 //		Table user {
 //		id integer [primary key]
