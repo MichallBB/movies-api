@@ -26,10 +26,36 @@ public class FilmhubApplication {
 //                    ]
 //
 //        }
-//        account{
+//        user{
 //            id:
 //            name:
-//            rated_movies:
-//            want_to_see:
-//            favorites:
+//            rated_movies: List<movie_id>
+//            want_to_see: List<movie_id>
+//            favorites: List<movie_id>
 //        }
+//Table movie {
+//		id integer [primary key]
+//		name varchar
+//		production_date timestamp
+//		production_country varchar
+//		count_of_peaople_rated_this_movie integer
+//		sum_of_total_rating double
+//		description varchar
+//		// List of actors
+//		}
+//
+//		Table actor {
+//		id integer [primary key]
+//		real_name varchar
+//		name_in_movie varchar
+//		}
+//
+//		Table user {
+//		id integer [primary key]
+//		name varchar
+//		rated_movies movie.id [note: 'List<movie_id>']
+//		want_to_see movie.id [note: 'List<movie_id>']
+//		favorites movie.id [note: 'List<movie_id>']
+//		}
+//
+//		Ref: actor.id <> movie.id
