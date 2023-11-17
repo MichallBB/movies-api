@@ -11,4 +11,4 @@ spring:
 welcome:
   message: welcome
 server:
-  port: '2137'
+  port: '1337'

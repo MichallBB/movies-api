@@ -5,11 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class FilmhubApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(FilmhubApplication.class, args);
 	}
-
 }
 //        movie{
 //            id:
