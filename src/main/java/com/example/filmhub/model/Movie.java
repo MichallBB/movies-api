@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -17,13 +18,21 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    private String movieName;
+    private int prodYear;
+    private String description;
+    private List<String> directions;
+    private List<String> scenarios;
+    private List<String> movieGenre;
+    private List<String> prodCountries;
+    private String premiereDateAndPlace;
 
-//    TODO: Actor table should have unique real names and list of id movies where they played
-// TODO: zamienic pobieranie aktorow na filmy + aktorow
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "Movie_actors",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "actors_id"))
     private Collection<Actor> actors = new ArrayList<>();
 
+//    @OneToMany(mappedBy = "movie")
+//    private List<MovieRole> roles;
 }
