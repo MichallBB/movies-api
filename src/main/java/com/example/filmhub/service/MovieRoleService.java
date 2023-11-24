@@ -12,5 +12,5 @@ public interface MovieRoleService {
     List<MovieRole> getAllMovieRoles();
     MovieRole createMovieRole(Long movie_id, Long actor_id, MovieRoleDTO movieName);
     int deleteMovieRoleById(Long id);
-    MovieRole getMovieRoleByActorId(Long id);
+    List<MovieRole> getMovieRoleByActorId(Long id);
 }

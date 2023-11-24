@@ -41,6 +41,7 @@ public class MovieRoleServiceImpl implements MovieRoleService {
     public MovieRole createMovieRole(Long movie_id, Long actor_id, MovieRoleDTO movieName){
         Movie movie = movieRepository.findById(movie_id).orElseThrow(() -> new IllegalStateException("Movie not found"));
         Actor actor = actorRepository.findById(actor_id).orElseThrow(() -> new IllegalStateException("Can not find actor"));
+//        TODO: find movierole for movie and actor if exist then add it to -- deprecated
         MovieRole movieRole = new MovieRole();
         movieRole.setMovie(movie);
         movieRole.setActor(actor);
@@ -56,7 +57,7 @@ public class MovieRoleServiceImpl implements MovieRoleService {
         return 1;
     }
 
-    public MovieRole getMovieRoleByActorId(Long id) {
+    public List<MovieRole> getMovieRoleByActorId(Long id) {
         try{
             return movieRoleRepository.findByActorId(id);
         }catch (IllegalStateException e){

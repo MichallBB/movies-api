@@ -8,13 +8,19 @@ import com.example.filmhub.repository.MovieRoleRepository;
 import com.example.filmhub.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MovieServiceImpl implements MovieService {
+    private static final String UPLOAD_DIRECTORY = "E:\\springjpa\\angular\\filmhub\\src\\assets\\images\\movies\\";
     private final MovieRepository movieRepository;
     private final ActorRepository actorRepository;
 
@@ -59,5 +65,15 @@ public class MovieServiceImpl implements MovieService {
         movie.setActors(actors);
 
         return movieRepository.save(movie);
+    }
+    @Override
+    public String addMovieImage(MultipartFile file, Long file_id) throws IOException {
+        Movie movie = movieRepository.findById(file_id).orElseThrow(() -> new IllegalStateException("Can not find movie"));
+        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, String.valueOf(file_id) + ".jpg");
+        Files.write(fileNameAndPath, file.getBytes());
+        String fullPath = UPLOAD_DIRECTORY + file_id;
+        movie.setMovieImageFileId(fullPath);
+        movieRepository.save(movie);
+        return "test";
     }
 }
