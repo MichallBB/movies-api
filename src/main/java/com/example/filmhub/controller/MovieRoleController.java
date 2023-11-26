@@ -47,7 +47,8 @@ public class MovieRoleController {
         return ResponseEntity.ok().body(1);
     }
     @GetMapping("/actor/{id}")
-    public MovieRole getMovieRoleByActorId(@PathVariable Long id){
+    public List<MovieRole> getMovieRoleByActorId(@PathVariable Long id){
         return movieRoleService.getMovieRoleByActorId(id);
     }
+
 }

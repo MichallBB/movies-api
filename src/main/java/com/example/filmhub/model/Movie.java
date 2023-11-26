@@ -19,8 +19,10 @@ public class Movie {
     @Column(name = "id", nullable = false)
     private Long id;
     private String movieName;
+    private String alternateFullMovieName;
     private int prodYear;
     private String description;
+    private String movieImageFileId;
     private List<String> directions;
     private List<String> scenarios;
     private List<String> movieGenre;
@@ -32,6 +34,8 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "actors_id"))
     private Collection<Actor> actors = new ArrayList<>();
+
+
 
 //    @OneToMany(mappedBy = "movie")
 //    private List<MovieRole> roles;

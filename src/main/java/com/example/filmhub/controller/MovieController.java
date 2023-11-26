@@ -7,7 +7,9 @@ import com.example.filmhub.serviceImpl.MovieServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,5 +46,11 @@ public class MovieController {
     @PatchMapping("/{movie_id}/{actor_id}")
     public Movie updateActorsForMovie(@PathVariable Long movie_id, @PathVariable Long actor_id){
         return movieService.updateActorForMovie(movie_id, actor_id);
+    }
+
+    @PatchMapping("/image/{id}")
+    public ResponseEntity<String> addFileImage(@RequestParam("file") MultipartFile file, @PathVariable Long id) throws IOException {
+        String result = movieService.addMovieImage(file, id);
+        return ResponseEntity.ok().body(result);
     }
 }
