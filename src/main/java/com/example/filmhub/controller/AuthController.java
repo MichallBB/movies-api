@@ -44,7 +44,11 @@ public class AuthController{
     }
 
     @PostMapping("login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
+
+        if(!userRepository.existsByUsername(loginDto.getUsername())){
+            return new ResponseEntity<>("Username doesn't exist", HttpStatus.UNAUTHORIZED);
+        }
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginDto.getUsername(),

@@ -41,7 +41,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .authorizeHttpRequests((authz) ->
                         authz
                                 .requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers("/api/movies").authenticated()
+                                //.requestMatchers("/api/movies").authenticated()
                                 .anyRequest().permitAll()
                 )
                 .csrf((csrf) -> csrf.disable())
