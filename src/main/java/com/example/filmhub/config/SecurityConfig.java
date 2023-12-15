@@ -4,6 +4,7 @@ import com.example.filmhub.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,6 +43,20 @@ public class SecurityConfig implements WebMvcConfigurer {
                         authz
                                 .requestMatchers("/api/auth/**").permitAll()
                                 //.requestMatchers("/api/movies").authenticated()
+                                .requestMatchers(HttpMethod.DELETE,
+                                        "/api/actors",
+                                        "/api/movies",
+                                        "/api/movieroles").authenticated()
+                                .requestMatchers(
+                                        HttpMethod.POST,
+                                        "/api/actors",
+                                        "/api/movies",
+                                        "/api/movieroles").authenticated()
+                                .requestMatchers(
+                                        HttpMethod.PATCH,
+                                        "/api/actors",
+                                        "/api/movies",
+                                        "/api/movieroles").authenticated()
                                 .anyRequest().permitAll()
                 )
                 .csrf((csrf) -> csrf.disable())
