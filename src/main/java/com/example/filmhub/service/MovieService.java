@@ -16,4 +16,6 @@ public interface MovieService {
     int deleteMovieById(Long id);
     Movie updateActorForMovie(Long movie_id, Long actor_id);
     String addMovieImage(MultipartFile file, Long file_id) throws IOException;
+
+    List<Movie> findMoviesByMultipleActors(List<Long> actorId);
 }

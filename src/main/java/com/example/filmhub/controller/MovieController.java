@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -51,6 +53,19 @@ public class MovieController {
     @PatchMapping("/image/{id}")
     public ResponseEntity<String> addFileImage(@RequestParam("file") MultipartFile file, @PathVariable Long id) throws IOException {
         String result = movieService.addMovieImage(file, id);
+        return ResponseEntity.ok().body(result);
+    }
+    // parameter variables names can be randomly chosen but have to be unique
+    // method searches for a movie by multiple actors id given in parameters
+    @GetMapping("/actors")
+    public ResponseEntity<List<Movie>> getMoviesByActors(@RequestParam Map<String, String> actor_id){
+        // map to list of actors ids
+        List<Long> actors_id = new ArrayList<Long>();
+        for (String actors_ids : actor_id.values()){
+            actors_id.add(Long.parseLong(actors_ids));
+        }
+
+        List<Movie> result = movieService.findMoviesByMultipleActors(actors_id);
         return ResponseEntity.ok().body(result);
     }
 }

@@ -14,9 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -74,6 +72,44 @@ public class MovieServiceImpl implements MovieService {
         String fullPath = UPLOAD_DIRECTORY + file_id;
         movie.setMovieImageFileId(fullPath);
         movieRepository.save(movie);
-        return "test";
+        return "Image added successfully";
+    }
+
+    public List<Movie> findMoviesByMultipleActors(List<Long> actorId) {
+
+        List<Movie> movies = movieRepository.findAll();
+        List<Movie> result = new ArrayList<Movie>();
+        System.out.println(actorId);
+        for(Movie movie : movies) {
+            // 1: true
+            // 2: false
+            // hashmap to store actors id and true or fals if it is in movie
+            if (movie.getActors().isEmpty()) {
+                break;
+            }
+            Map<Long, Boolean> map = new HashMap<Long, Boolean>();
+
+            for(Actor actor : movie.getActors()) {
+                map.put(actor.getId(), false);
+                for(Long id : actorId){
+                    if(actor.getId().equals(id)){
+                        map.put(id, true);
+                    }
+                }
+            }
+
+            // check if all hashmap rows is true then add movie to result
+            boolean allTrue = true;
+            for (boolean value : map.values()) {
+                if (!value) {
+                    allTrue = false;
+                    break;
+                }
+            }
+            if (allTrue) {
+                result.add(movie);
+            }
+        }
+        return result;
     }
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @Entity
 public class Movie {
-    // TODO: search movies by filter with multiple actors
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
